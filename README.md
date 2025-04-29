@@ -1,6 +1,6 @@
 # Virtualised-Internal-Network-Segmentation-with-VLANs-Using-BookwormPup64-and-OpenWrt
 
-This write-up documents a practical virtualised internal network segmentation project implemented using multiple BookwormPup64 (a lightweight Puppy Linux distribution based on Debian Bookworm) VMs to simulate VLAN-separated departments and a OpenWrt VM serving as the router, all hosted within VirtualBox.
+This write-up documents a practical virtualised internal network segmentation project implemented using multiple BookwormPup64 (a lightweight Puppy Linux distribution based on Debian Bookworm) VMs to simulate VLAN-separated departments and a OpenWrt (open wireless router) VM serving as the router, all hosted within VirtualBox.
 
 
 
