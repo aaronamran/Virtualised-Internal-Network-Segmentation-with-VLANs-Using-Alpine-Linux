@@ -73,9 +73,23 @@ This write-up documents a practical virtualised internal network segmentation pr
   ```
   VBoxManage convertfromraw --format VDI openwrt-*-x86-64-combined-*.img openwrt.vdi
   ```
-  ![image](https://github.com/user-attachments/assets/e8e2cf4b-ae41-4146-acf1-435252e843d6)
+  ![image](https://github.com/user-attachments/assets/e8e2cf4b-ae41-4146-acf1-435252e843d6) <br />
+
+- To install OpenWrt in VirtualBox, click on New and name it OpenWrt. Choose Linux as the type and the version is Other Linux (64-bit) <br />
+  ![image](https://github.com/user-attachments/assets/40ae26c5-ade9-4688-a996-a9a55f52d872) <br />
+
+- The Base Memory is set to 512MB, and the number of Processors is 1 <br />
+  ![image](https://github.com/user-attachments/assets/2d4fd88b-2edf-4653-bceb-bd83a880abde) <br />
+
+- The previously converted `.vdi` file is then used as the existing virtual hard disk file. This means manually configuring the storage size or requirements is not needed <br />
+  ![image](https://github.com/user-attachments/assets/60c68fd8-f391-43bb-bc3a-4ecb0943342b) <br />
 
 - 
+
+  
+
+
+
 
 
 
