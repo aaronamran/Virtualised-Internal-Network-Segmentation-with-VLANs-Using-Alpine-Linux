@@ -131,13 +131,17 @@ This write-up documents a practical virtualised internal network segmentation pr
 ## OpenWrt Router Configuration
 - Power on the OpenWrt VM. OpenWrt will be configured to act as a router with 802.1q sub-interfaces and firewall rules
 - Login using the terminal. The default user is root and there is no password <br />
-
+  ![image](https://github.com/user-attachments/assets/275a9732-684e-46f9-b785-0af94a8f323f) <br />
 
 - Installing required packages is optional
   ```
   opkg update
   opkg install ip-full iptables tcpdump kmod-8021q
   ```
+
+  If internet connection is unavailable and `ping google.com` fails, edit `/etc/config/network` to reflect the correct assignments <br />
+  ![image](https://github.com/user-attachments/assets/f7449925-ced5-4494-b4ea-db77a138a97e) <br />
+
 
 - Enable VLAN interfaces by editing `/etc/config/network`
   ```
