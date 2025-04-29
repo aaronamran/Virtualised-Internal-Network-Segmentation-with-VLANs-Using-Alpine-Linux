@@ -15,37 +15,36 @@ This write-up documents a practical virtualised internal network segmentation pr
 - Download the BookwormPup64 ISO image suitable for VirtualBox from [https://puppylinux-woof-ce.github.io/](https://puppylinux-woof-ce.github.io/). As shown in the cropped screenshot below, choose the `BookwormPup64 10.0` version <br />
   ![image](https://github.com/user-attachments/assets/705b2d92-7f00-4a94-b84f-6bb9ba965360) <br />
 
+  Clicking on the Main link brings us to this web page. Version 10.0.10 is selected <br />
+  ![image](https://github.com/user-attachments/assets/f6216f35-641c-483a-a007-24a1086874c1) <br />
+
+  Download the BookwormPup64_10.0.10.iso image <br />
+  ![image](https://github.com/user-attachments/assets/057b7935-81f1-4275-8a44-2990429a0134) <br />
+
 - In VirtualBox, add a new VM, name it and select the correct ISO image <br />
-  ![image](https://github.com/user-attachments/assets/457a44e3-5684-4e88-b797-a72b04ad8172) <br />
+  ![image](https://github.com/user-attachments/assets/ad1e93f4-9898-4757-858a-5bb63824b20c) <br />
 
 - Since BookwormPup64 is lightweight, 1024MB for its Base Memory and 1 CPU is enough <br />
-  ![image](https://github.com/user-attachments/assets/5a4018c5-8bb0-40f7-b388-94c3b1873cee) <br />
+  ![image](https://github.com/user-attachments/assets/24436469-d448-4336-be2f-c590be05dc02) <br />
 
 - A disk size of 3GB is enough for the sake of this project <br />
-  ![image](https://github.com/user-attachments/assets/a44519ec-c01a-4bd3-ad2b-42135dc264a9) <br />
+  ![image](https://github.com/user-attachments/assets/44bfa875-f7f5-46da-865d-21668b5de77c) <br />
 
 - The summary would appear as the following. Finish the setup and start the VM <br />
-  ![image](https://github.com/user-attachments/assets/d566cf7c-0f2c-4f3d-aedd-da807cb4fe8c) <br />
+  ![image](https://github.com/user-attachments/assets/20cb6881-3a6c-41aa-9ef9-95bf5193f341) <br />
 
-- Once the template VM is powered on, run the initial setup by choosing the default options <br />
-  ![image](https://github.com/user-attachments/assets/62ff3fdf-4258-4140-96d1-edb680addf97) <br />
-
-- Then run the following commands to update and install tooling <br />
+- Once the template VM is powered on, run the following commands to update and install tooling <br />
   ```
-  sudo apt update && sudo apt upgrade -y
-  sudo apt install vlan bridge-utils iproute2 iptables tcpdump -y
+  sudo apt update && sudo apt install vlan iproute2 iptables tcpdump -y
   ```
+  ![image](https://github.com/user-attachments/assets/009eac05-a3bc-4f89-8a79-d04e816743b4)
 
 - 
 
 
 
 
-  
 
-
-
-  
 
 
 ## OpenWrt VM Setup as Router
