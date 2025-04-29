@@ -89,21 +89,45 @@ This write-up documents a practical virtualised internal network segmentation pr
   ![image](https://github.com/user-attachments/assets/f8261c89-ee09-4c58-966c-77b55155adc8) <br />
   The purpose of this dual NIC setup in OpenWrt is to simulate a real world router which connects to 2 different networks, which is the Wide Area Network for internet access and the Local Area Network for internal devices which are isolated from the outside world
 
-  
-
-
-
-  
-
-
-
-
-
-
 
 
 ## Configuration of VLAN Sub-interfaces
+- On each of the BookwormPup64 Department VMs, load the 802.1q Module
+  ```
+  sudo modprobe 8021q
+  ```
 
+- For the HR Department VM, VLAN 10 with the following commands are used
+  ```
+  sudo ip link add link eth0 name eth0.10 type vlan id 10
+  sudo ip addr add 192.168.10.2/24 dev eth0.10
+  sudo ip link set up eth0.10
+  sudo ip link set down eth0
+  ```
+  ![image](https://github.com/user-attachments/assets/a30d1e95-d3e1-4646-ac3d-be1b6a757da6)
+
+
+- For the IT Department VM, VLAN 20 with the following commands are used
+  ```
+  sudo ip link add link eth0 name eth0.20 type vlan id 20
+  sudo ip addr add 192.168.20.2/24 dev eth0.20
+  sudo ip link set up eth0.20
+  sudo ip link set down eth0
+  ```
+
+
+- For the Finance Department VM, VLAN 30 with the following commands are used
+  ```
+  sudo ip link add link eth0 name eth0.30 type vlan id 30
+  sudo ip addr add 192.168.30.2/24 dev eth0.30
+  sudo ip link set up eth0.30
+  sudo ip link set down eth0
+  ```
+
+  
+
+
+  
 
 
 
