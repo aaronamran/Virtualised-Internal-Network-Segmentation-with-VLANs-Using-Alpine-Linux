@@ -47,13 +47,9 @@ This write-up documents a practical virtualised internal network segmentation pr
 
 
 
-
-
-
-
-
-
 ## OpenWrt VM Setup as Router
+- 
+
 
 
 
@@ -61,5 +57,8 @@ This write-up documents a practical virtualised internal network segmentation pr
 
 
 
+
+
 ## Testing of Department VMs
+
 
