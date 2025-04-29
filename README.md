@@ -48,7 +48,21 @@ This write-up documents a practical virtualised internal network segmentation pr
 
 
 ## OpenWrt VM Setup as Router
-- 
+- Download OpenWrt from [https://downloads.openwrt.org/](https://downloads.openwrt.org/). To prevent unnecessary headaches, the current stable release is selected <br />
+  ![image](https://github.com/user-attachments/assets/91a191e4-e0b5-4f44-bb0e-2c75a9447810) <br />
+
+- Clicking on the Stable Version brings us to this web page. Scroll down and click on `x86` <br />
+  ![image](https://github.com/user-attachments/assets/b568ac61-cb68-4262-a9d0-b4093eab3d58) <br />
+
+- Choose the `64` <br />
+  ![image](https://github.com/user-attachments/assets/613c022d-c783-4f1a-8d99-1f47a1aefcdd) <br />
+
+- The `generic-ext4-combined.img.gz` is chosen and is downloaded. The reasons for this choice is it uses ext4 which is writable and better for testing changes, the combined image includes both kernel + rootfs, and it has no EFI which works with Legacy BIOS mode in VirtualBox (default) <br />
+  ![image](https://github.com/user-attachments/assets/a018ea55-01ac-42d8-ae65-6427697e4407) <br />
+
+
+
+
 
 
 
