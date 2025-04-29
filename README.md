@@ -84,7 +84,14 @@ This write-up documents a practical virtualised internal network segmentation pr
 - The previously converted `.vdi` file is then used as the existing virtual hard disk file. This means manually configuring the storage size or requirements is not needed <br />
   ![image](https://github.com/user-attachments/assets/60c68fd8-f391-43bb-bc3a-4ecb0943342b) <br />
 
-- 
+- Two adapters are in used by the OpenWrt VM, which is the Bridged Adapter (WAN) and Internal Network (trunk) <br />
+  ![image](https://github.com/user-attachments/assets/0d8cadb8-3f8c-41b8-818c-c40759780b1b) <br />
+  ![image](https://github.com/user-attachments/assets/f8261c89-ee09-4c58-966c-77b55155adc8) <br />
+  The purpose of this dual NIC setup in OpenWrt is to simulate a real world router which connects to 2 different networks, which is the Wide Area Network for internet access and the Local Area Network for internal devices which are isolated from the outside world
+
+  
+
+
 
   
 
