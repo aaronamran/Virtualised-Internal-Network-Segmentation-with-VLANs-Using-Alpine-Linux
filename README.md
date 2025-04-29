@@ -60,9 +60,7 @@ This write-up documents a practical virtualised internal network segmentation pr
 - The `generic-ext4-combined.img.gz` is chosen and is downloaded. The reasons for this choice is it uses ext4 which is writable and better for testing changes, the combined image includes both kernel + rootfs, and it has no EFI which works with Legacy BIOS mode in VirtualBox (default) <br />
   ![image](https://github.com/user-attachments/assets/a018ea55-01ac-42d8-ae65-6427697e4407) <br />
 
-
-
-
+- 
 
 
 
