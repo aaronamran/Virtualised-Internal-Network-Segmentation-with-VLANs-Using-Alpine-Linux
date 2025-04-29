@@ -140,6 +140,23 @@ This write-up documents a practical virtualised internal network segmentation pr
   ```
 
   If internet connection is unavailable and `ping google.com` fails, edit `/etc/config/network` to reflect the correct assignments <br />
+  ```
+  config interface 'loopback'
+    option device 'lo'
+    option proto 'static'
+    option ipaddr '127.0.0.1'
+    option netmask '255.0.0.0'
+
+  config interface 'wan'
+      option device 'eth0'
+      option proto 'dhcp'
+  
+  config interface 'lan'
+      option device 'eth1'
+      option proto 'static'
+      option ipaddr '192.168.1.1'
+      option netmask '255.255.255.0'
+  ```
   ![image](https://github.com/user-attachments/assets/f7449925-ced5-4494-b4ea-db77a138a97e) <br />
 
 
