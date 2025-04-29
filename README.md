@@ -7,7 +7,8 @@ This write-up documents a practical virtualised internal network segmentation pr
 1. [BookwormPup64 VMs Setup as VLANs](#bookwormpup64-vms-setup-as-vlans)
 2. [OpenWrt VM Setup as Router](#openwrt-vm-setup-as-router)
 3. [Configuration of VLAN Sub-interfaces](#configuration-of-vlan-sub-interfaces)
-4. [Testing of Department VMs](#testing-of-department-vms)
+4. [OpenWrt Router Configuration](#openwrt-router-configuration)
+5. [Testing of Department VMs](#testing-of-department-vms)
 
 
 ## BookwormPup64 VMs Setup as VLANs
@@ -127,7 +128,123 @@ This write-up documents a practical virtualised internal network segmentation pr
   ![image](https://github.com/user-attachments/assets/c7480e56-e6bf-4b96-a7ae-72541a3ae7f3)
 
 
+## OpenWrt Router Configuration
+- Power on the OpenWrt VM. OpenWrt will be configured to act as a router with 802.1q sub-interfaces and firewall rules
+- Login using the terminal. The default user is root and there is no password <br />
+
+
+- Installing required packages is optional
+  ```
+  opkg update
+  opkg install ip-full iptables tcpdump kmod-8021q
+  ```
+
+- Enable VLAN interfaces by editing `/etc/config/network`
+  ```
+  config interface 'vlan10'
+    option ifname 'eth0.10'
+    option proto 'static'
+    option ipaddr '192.168.10.1'
+    option netmask '255.255.255.0'
+
+  config interface 'vlan20'
+      option ifname 'eth0.20'
+      option proto 'static'
+      option ipaddr '192.168.20.1'
+      option netmask '255.255.255.0'
+  
+  config interface 'vlan30'
+      option ifname 'eth0.30'
+      option proto 'static'
+      option ipaddr '192.168.30.1'
+      option netmask '255.255.255.0'
+  ```
+
+- Enable VLAN tagging in /etc/config/network under physical interface
+  ```
+  config device
+    option name 'eth0.10'
+    option type '8021q'
+    option ifname 'eth0'
+    option vid '10'
+
+  config device
+      option name 'eth0.20'
+      option type '8021q'
+      option ifname 'eth0'
+      option vid '20'
+  
+  config device
+      option name 'eth0.30'
+      option type '8021q'
+      option ifname 'eth0'
+      option vid '30'
+  ```
+
+
+- To enable IP forwarding (which is usually already enabled), check `/etc/sysctl.conf` or use
+  ```
+  echo 1 > /proc/sys/net/ipv4/ip_forward
+  ```
+
+- Setup the iptables rules by editing or use UCI to apply
+  ```
+  iptables -P FORWARD DROP
+
+  # Allow intra-VLAN traffic
+  iptables -A FORWARD -i eth0.10 -o eth0.10 -j ACCEPT
+  iptables -A FORWARD -i eth0.20 -o eth0.20 -j ACCEPT
+  iptables -A FORWARD -i eth0.30 -o eth0.30 -j ACCEPT
+  
+  # IT → HR (SSH)
+  iptables -A FORWARD -i eth0.20 -o eth0.10 -p tcp --dport 22 -j ACCEPT
+  
+  # Finance → IT (RDP)
+  iptables -A FORWARD -i eth0.30 -o eth0.20 -p tcp --dport 3389 -j ACCEPT
+  
+  # Allow return traffic
+  iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+  ```
+
+
+- Make it persistent by saving the firewall rules
+  ```
+  /etc/init.d/firewall save
+  /etc/init.d/firewall restart
+  ```
+
+
 
 ## Testing of Department VMs
+- To test the VLAN isolation, from each VM, use the following commands
+  ```
+  sudo tcpdump -i eth0.10 -vv     # HR
+  sudo tcpdump -i eth0.20 -vv     # IT
+  sudo tcpdump -i eth0.30 -vv     # Finance
+  ```
+
+
+- Ping the router gateway
+  ```
+  ping -c 4 192.168.10.1   # from HR
+  ping -c 4 192.168.20.1   # from IT
+  ping -c 4 192.168.30.1   # from Finance
+  ```
+
+
+- Test the allowed inter-VLAN rules. From IT, SSH to HR (if SSH server is installed)
+  ```
+  ssh hr_department@192.168.10.2
+  ```
+
+
+- From Finance, RDP to IT (if RDP server is installed)
+  ```
+  rdesktop 192.168.20.2
+  ```
+
+
+
+
 
 
