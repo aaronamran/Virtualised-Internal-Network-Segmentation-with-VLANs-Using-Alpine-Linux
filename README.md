@@ -43,7 +43,7 @@ This write-up documents a practical virtualised internal network segmentation pr
   ![image](https://github.com/user-attachments/assets/bb5961d6-8269-4022-9c5c-82412e31820d) <br />
 
 - The BookwormPup64 VM is cloned into `BookwormPup64 HR`, `BookwormPup64 IT` and `BookwormPup64 Finance` with the following settings <br />
-  ![image](https://github.com/user-attachments/assets/07304cd9-4d4a-4ea8-a0da-5cd45b8e557d) <br />
+  ![image](https://github.com/user-attachments/assets/f56a296b-99e1-4df6-8022-e4632edcddc6) <br />
 
 
 
