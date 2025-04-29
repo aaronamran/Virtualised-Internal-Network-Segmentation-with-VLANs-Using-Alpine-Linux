@@ -45,6 +45,9 @@ This write-up documents a practical virtualised internal network segmentation pr
 - The BookwormPup64 VM is cloned into `BookwormPup64 HR`, `BookwormPup64 IT` and `BookwormPup64 Finance` with the following settings <br />
   ![image](https://github.com/user-attachments/assets/f56a296b-99e1-4df6-8022-e4632edcddc6) <br />
 
+  Now 3 separate BookwormPup64 VMs should be available for use in VirtualBox <br />
+  ![image](https://github.com/user-attachments/assets/412a331e-aeba-4af8-bd87-96d7c280123f) <br />
+
 
 
 ## OpenWrt VM Setup as Router
