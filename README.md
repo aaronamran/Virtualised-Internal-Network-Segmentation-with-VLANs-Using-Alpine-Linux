@@ -63,7 +63,20 @@ This write-up documents a practical virtualised internal network segmentation pr
 - The `generic-ext4-combined.img.gz` is chosen and is downloaded. The reasons for this choice is it uses ext4 which is writable and better for testing changes, the combined image includes both kernel + rootfs, and it has no EFI which works with Legacy BIOS mode in VirtualBox (default) <br />
   ![image](https://github.com/user-attachments/assets/a018ea55-01ac-42d8-ae65-6427697e4407) <br />
 
+- Extract the downloaded file to get the `.img` file
+- `VBoxManage.exe` is required to convert `.img` to `.vdi`. Open command prompt and run the following command to add VirtualBox to Windows PATH. Now VBoxManage can be used from this terminal session
+  ```
+  SET PATH=%PATH%;"C:\Program Files\Oracle\VirtualBox"
+  ```
+  
+- To convert the filem run the following command in the terminal. Ensure that the file path is properly adjusted. The output `.vdi` file will be saved in the current folder of the terminal <br />
+  ```
+  VBoxManage convertfromraw --format VDI openwrt-*-x86-64-combined-*.img openwrt.vdi
+  ```
+  ![image](https://github.com/user-attachments/assets/e8e2cf4b-ae41-4146-acf1-435252e843d6)
+
 - 
+
 
 
 
