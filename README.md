@@ -114,6 +114,7 @@ This write-up documents a practical virtualised internal network segmentation pr
   sudo ip link set up eth0.20
   sudo ip link set down eth0
   ```
+  ![image](https://github.com/user-attachments/assets/2644e58b-6c83-4169-8380-72cd45ed3d43)
 
 
 - For the Finance Department VM, VLAN 30 with the following commands are used
@@ -123,12 +124,7 @@ This write-up documents a practical virtualised internal network segmentation pr
   sudo ip link set up eth0.30
   sudo ip link set down eth0
   ```
-
-  
-
-
-  
-
+  ![image](https://github.com/user-attachments/assets/c7480e56-e6bf-4b96-a7ae-72541a3ae7f3)
 
 
 
