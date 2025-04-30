@@ -295,8 +295,14 @@ This write-up documents a practical virtualised internal network segmentation pr
   ip addr add 192.168.30.1/24 dev eth1.30
   ip link set up eth1.30
   ```
-   
+  Verify the interfaces using
+  ```
+  ip a | grep eth1
+  ```
+  ![image](https://github.com/user-attachments/assets/c22db8f3-8118-4369-b93c-c94c47b26e31)
 
+
+   
 - To test the VLAN isolation, from each VM, use the following commands
   ```
   sudo tcpdump -i eth0.10 -vv     # HR
