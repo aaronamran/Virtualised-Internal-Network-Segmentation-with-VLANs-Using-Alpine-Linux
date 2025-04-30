@@ -250,13 +250,32 @@ This write-up documents a practical virtualised internal network segmentation pr
 
 - Make it persistent by saving the firewall rules
   ```
-  /etc/init.d/firewall save
-  /etc/init.d/firewall restart
+  /etc/init.d/firewall reload
   ```
 
 
 
 ## Testing of Department VMs
+- Before testing the department VMs, realism is added to this project by giving internet access to BookwormPup64 VMs via OpenWrt
+- To verify or enable IP forwarding in OpenWrt, use
+  ```
+  cat /proc/sys/net/ipv4/ip_forward
+  ```
+  If it returns 0, enable it
+  ```
+  echo 1 > /proc/sys/net/ipv4/ip_forward
+  ```
+  ![image](https://github.com/user-attachments/assets/b427b8b1-6da5-45e4-8a52-b2327e29e2c0)
+
+- NAT is required to be setup on OpenWrt. Assuming eth0 = Bridged (WAN) and eth1 = Internal trunk (LAN with Puppy Linux), run the following in OpenWrt
+  ```
+  iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+  iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT
+  iptables -A FORWARD -i eth0 -o eth1 -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+  ```
+  ![image](https://github.com/user-attachments/assets/73e2d3d5-579f-4628-b212-52a17fdbd8b7)
+
+
 - To test the VLAN isolation, from each VM, use the following commands
   ```
   sudo tcpdump -i eth0.10 -vv     # HR
