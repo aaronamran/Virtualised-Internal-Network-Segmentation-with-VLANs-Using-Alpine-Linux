@@ -133,12 +133,13 @@ This write-up documents a practical virtualised internal network segmentation pr
 - Login using the terminal. The default user is root and there is no password <br />
   ![image](https://github.com/user-attachments/assets/10467422-6045-4a16-baa0-b0e5682b7c1e) <br />
 
-- Installing required packages is optional
+- Install the required packages in OpenWrt
   ```
   opkg update
+  opkg install iptables-mod-tproxy iptables-mod-conntrack-extra kmod-ipt-nat kmod-ipt-conntrack kmod-ipt-core kmod-nf-nat kmod-nf-conntrack
   opkg install ip-full iptables tcpdump
   ```
-
+  
 - Note that the stable version of OpenWrt used in this project already has `kmod-8021q` integrated into the kernel. From the website link [https://downloads.openwrt.org/releases/24.10.1/targets/x86/64/kmods/6.6.86-1-af351158cfb5febf5155a3aa53785982/](https://downloads.openwrt.org/releases/24.10.1/targets/x86/64/kmods/6.6.86-1-af351158cfb5febf5155a3aa53785982/), `kmod-8021q` cannot be found 
 
 - To check if the 802.1Q VLAN support is present and active, use the command
@@ -189,8 +190,9 @@ This write-up documents a practical virtualised internal network segmentation pr
       option ipaddr '192.168.30.1'
       option netmask '255.255.255.0'
   ```
+  ![image](https://github.com/user-attachments/assets/0a202f34-0a50-4526-b973-5c328c114af7)
 
-- Enable VLAN tagging in /etc/config/network under physical interface
+- Enable VLAN tagging in `/etc/config/network` under physical interface
   ```
   config device
     option name 'eth0.10'
@@ -210,6 +212,7 @@ This write-up documents a practical virtualised internal network segmentation pr
       option ifname 'eth0'
       option vid '30'
   ```
+  ![image](https://github.com/user-attachments/assets/80ee7fb8-b613-410e-b949-d899dc43ef85)
 
 
 - To enable IP forwarding (which is usually already enabled), check `/etc/sysctl.conf` or use
@@ -262,13 +265,13 @@ This write-up documents a practical virtualised internal network segmentation pr
   ```
 
 
-- Test the allowed inter-VLAN rules. From IT, SSH to HR (if SSH server is installed)
+- Test the allowed inter-VLAN rules. From IT, SSH to HR (if SSH server on HR is installed)
   ```
   ssh hr_department@192.168.10.2
   ```
 
 
-- From Finance, RDP to IT (if RDP server is installed)
+- From Finance, RDP to IT (if RDP server on IT is installed)
   ```
   rdesktop 192.168.20.2
   ```
