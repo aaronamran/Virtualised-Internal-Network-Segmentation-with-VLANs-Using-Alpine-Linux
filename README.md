@@ -1,6 +1,6 @@
-# Virtualised-Internal-Network-Segmentation-with-VLANs-Using-BookwormPup64-and-OpenWrt
+# Virtualised-Internal-Network-Segmentation-with-VLANs-Using-Debian-Netinst-and-OpenWrt
 
-This write-up documents a practical virtualised internal network segmentation project implemented using multiple BookwormPup64 (a lightweight Puppy Linux distribution based on Debian Bookworm) VMs to simulate VLAN-separated departments and a OpenWrt (open wireless router) VM serving as the router, all hosted within VirtualBox.
+This write-up documents a practical virtualised internal network segmentation project implemented using multiple Debian Netinst VMs to simulate VLAN-separated departments and a OpenWrt (open wireless router) VM serving as the router, all hosted within VirtualBox.
 
 
 
@@ -301,6 +301,38 @@ This write-up documents a practical virtualised internal network segmentation pr
   ```
   ![image](https://github.com/user-attachments/assets/c22db8f3-8118-4369-b93c-c94c47b26e31)
 
+- If pinging for network connectivity still does not work, try removing VLAN tags temporarily to verify raw connectivity <br />
+  On OpenWrt, assign IP directly to eth1 (no VLAN tagging)
+  ```
+  ip addr flush dev eth1
+  ip addr add 192.168.10.1/24 dev eth1
+  ip link set up dev eth1
+  ```
+
+  On HR VM, do the same
+  ```
+  sudo ip addr flush dev eth0
+  sudo ip addr add 192.168.10.2/24 dev eth0
+  sudo ip link set up dev eth0
+  ```
+
+  If pinging still fails, try adding sudo ping. Checking the routing table using ip route gives the following <br />
+  ![image](https://github.com/user-attachments/assets/dbcf438d-1e30-46f7-b852-e37a2d455797) <br />
+  From the output, it shows that the routing table has something off. There are multiple overlapping routes for both eth0 and eth0.10, and there is also an APIPA address (169.254.x.x) which suggest DHCP failed at some point <br />
+  The first step for cleaning up is to remove the conflicting interfaces
+  ```
+  sudo ip link delete eth0.10
+  ```
+
+  Then set the VLAN up again, correctly
+  ```
+  sudo modprobe 8021q
+  sudo ip link add link eth0 name eth0.10 type vlan id 10
+  sudo ip addr flush dev eth0         # Clear previous IPs
+  sudo ip addr add 192.168.10.2/24 dev eth0.10
+  sudo ip link set up dev eth0
+  sudo ip link set up dev eth0.10
+  ```
 
    
 - To test the VLAN isolation, from each VM, use the following commands
