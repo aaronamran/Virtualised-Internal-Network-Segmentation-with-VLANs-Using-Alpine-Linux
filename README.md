@@ -272,20 +272,36 @@ This write-up documents a practical virtualised internal network segmentation pr
   ```
   ![image](https://github.com/user-attachments/assets/73e2d3d5-579f-4628-b212-52a17fdbd8b7)
 
+- Test the connection from each department VM by pinging the router gateway
+  ```
+  ping -c 4 192.168.10.1   # from HR
+  ping -c 4 192.168.20.1   # from IT
+  ping -c 4 192.168.30.1   # from Finance
+  ```
+  If the output results show 100% packet loss, try the following commands to create VLAN interfaces and assigning IPs
+  ```
+  # HR 
+  ip link add link eth1 name eth1.10 type vlan id 10
+  ip addr add 192.168.10.1/24 dev eth1.10
+  ip link set up eth1.10
+  
+  # IT
+  ip link add link eth1 name eth1.20 type vlan id 20
+  ip addr add 192.168.20.1/24 dev eth1.20
+  ip link set up eth1.20
+
+  # Finance
+  ip link add link eth1 name eth1.30 type vlan id 30
+  ip addr add 192.168.30.1/24 dev eth1.30
+  ip link set up eth1.30
+  ```
+   
 
 - To test the VLAN isolation, from each VM, use the following commands
   ```
   sudo tcpdump -i eth0.10 -vv     # HR
   sudo tcpdump -i eth0.20 -vv     # IT
   sudo tcpdump -i eth0.30 -vv     # Finance
-  ```
-
-
-- Ping the router gateway
-  ```
-  ping -c 4 192.168.10.1   # from HR
-  ping -c 4 192.168.20.1   # from IT
-  ping -c 4 192.168.30.1   # from Finance
   ```
 
 
