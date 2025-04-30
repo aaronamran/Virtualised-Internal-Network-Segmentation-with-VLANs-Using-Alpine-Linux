@@ -103,7 +103,6 @@ This write-up documents a practical virtualised internal network segmentation pr
   sudo ip link add link eth0 name eth0.10 type vlan id 10
   sudo ip addr add 192.168.10.2/24 dev eth0.10
   sudo ip link set up eth0.10
-  sudo ip link set down eth0
   ```
   ![image](https://github.com/user-attachments/assets/a30d1e95-d3e1-4646-ac3d-be1b6a757da6)
 
@@ -113,7 +112,6 @@ This write-up documents a practical virtualised internal network segmentation pr
   sudo ip link add link eth0 name eth0.20 type vlan id 20
   sudo ip addr add 192.168.20.2/24 dev eth0.20
   sudo ip link set up eth0.20
-  sudo ip link set down eth0
   ```
   ![image](https://github.com/user-attachments/assets/2644e58b-6c83-4169-8380-72cd45ed3d43)
 
@@ -123,7 +121,6 @@ This write-up documents a practical virtualised internal network segmentation pr
   sudo ip link add link eth0 name eth0.30 type vlan id 30
   sudo ip addr add 192.168.30.2/24 dev eth0.30
   sudo ip link set up eth0.30
-  sudo ip link set down eth0
   ```
   ![image](https://github.com/user-attachments/assets/c7480e56-e6bf-4b96-a7ae-72541a3ae7f3)
 
