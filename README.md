@@ -234,10 +234,18 @@ This write-up documents a practical virtualised internal network segmentation pr
   
   # Finance → IT (RDP)
   iptables -A FORWARD -i eth0.30 -o eth0.20 -p tcp --dport 3389 -j ACCEPT
-  
-  # Allow return traffic
-  iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
   ```
+  OpenWrt does not use the legacy `state` module by default anymore — it uses `conntrack`, which is a modern replacement
+  ```
+  # Allow return traffic
+  # This does not work
+  iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+  # This works
+  iptables -A FORWARD -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+  ```
+  ![image](https://github.com/user-attachments/assets/180e4d50-f329-4475-abcb-80c563acbf37)
+
 
 
 - Make it persistent by saving the firewall rules
